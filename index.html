@@ -16,8 +16,8 @@
 <div id="preloader"><div class="preload-mark"></div></div>
 
 <div class="nav-scrim"></div>
-<div class="mobile-nav">
-  <button class="mobile-close" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+<div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Main menu" aria-hidden="true">
+  <button class="mobile-close" type="button" aria-label="Close menu"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
   <a href="index.html">Home</a>
   <a href="about.html">About Us</a>
   <a href="services.html">Services</a>
@@ -50,14 +50,16 @@
       <a href="contact.html">Contact Us</a>
     </nav>
     <div class="header-actions">
-      <a class="icon-btn" href="properties.html" aria-label="Search properties"><i class="fa-solid fa-magnifying-glass"></i></a>
-      <a class="icon-btn" href="https://wa.me/2348012345678" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-      <a class="icon-btn" href="mailto:info@pineleafestates.com.ng" aria-label="Email us"><i class="fa-solid fa-envelope"></i></a>
+      <a class="icon-btn" href="properties.html" aria-label="Search properties"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></a>
+      <a class="icon-btn" href="https://wa.me/2348012345678" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+      <a class="icon-btn" href="mailto:info@pineleafestates.com.ng" aria-label="Email us"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
       <a href="investment.html" class="btn btn-gold btn-sm">Invest Now</a>
-      <button class="hamburger" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+      <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
     </div>
   </div>
 </header>
+
+<main id="main">
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="home">
@@ -67,11 +69,11 @@
     <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop')"></div>
   </div>
   <div class="container hero-inner">
-    <span class="hero-eyebrow"><i class="fa-solid fa-shield-halved"></i> Verified Titles · South-East &amp; South-South Nigeria</span>
+    <span class="hero-eyebrow"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Verified Titles · South-East &amp; South-South Nigeria</span>
     <h1><span data-typing='["Own Land Today.","Build Estates Together.","Invest With Confidence."]'>Own Land Today.</span><br>Build Your Future Tomorrow.</h1>
     <p class="lead">Invest confidently in verified lands, premium estates, and profitable real estate opportunities across Nigeria — backed by documentation you can trust.</p>
     <div class="hero-btns">
-      <a href="properties.html" class="btn btn-gold">Explore Properties <i class="fa-solid fa-arrow-right"></i></a>
+      <a href="properties.html" class="btn btn-gold">Explore Properties <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
       <a href="investment.html" class="btn btn-outline">Join PRRM</a>
     </div>
     <div class="hero-stats">
@@ -84,16 +86,16 @@
 
   <div class="hero-float-card">
     <span class="badge">Featured</span>
-    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=600&auto=format&fit=crop" alt="Pine Heights Estate plot in Onitsha">
+    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=600&auto=format&fit=crop" alt="Pine Heights Estate plot in Onitsha" loading="eager" decoding="async" width="600" height="338">
     <h4>Pine Heights Estate</h4>
-    <div class="loc"><i class="fa-solid fa-location-dot"></i> Onitsha, Anambra</div>
+    <div class="loc"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Onitsha, Anambra</div>
     <div class="price">₦12,000,000</div>
   </div>
 
   <div class="hero-dots"></div>
   <div class="hero-arrows">
-    <button class="prev" aria-label="Previous slide"><i class="fa-solid fa-chevron-left"></i></button>
-    <button class="next" aria-label="Next slide"><i class="fa-solid fa-chevron-right"></i></button>
+    <button type="button" class="prev" aria-label="Previous slide"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+    <button type="button" class="next" aria-label="Next slide"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
   </div>
 </section>
 
@@ -163,7 +165,7 @@
           <option value="sold">Sold</option>
         </select>
       </div>
-      <button class="btn btn-primary" onclick="location.href='properties.html'">Search <i class="fa-solid fa-magnifying-glass"></i></button>
+      <button type="button" class="btn btn-primary">Search <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>
     </div>
   </div>
 </div>
@@ -171,9 +173,9 @@
 <!-- ============ ABOUT PREVIEW ============ -->
 <section class="section" id="about">
   <div class="container">
-    <div class="grid-2 about-grid" style="align-items:center;">
+    <div class="grid-2 about-grid align-center">
       <div class="about-media reveal">
-        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=900&auto=format&fit=crop" alt="PineLeaf Estates development team on site">
+        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=900&auto=format&fit=crop" alt="PineLeaf Estates development team on site" loading="lazy" decoding="async" width="900" height="676">
         <div class="about-float">
           <b>10+ Years</b>
           <span>Delivering verified real estate</span>
@@ -182,14 +184,14 @@
       <div class="reveal reveal-delay-1">
         <span class="eyebrow">Who We Are</span>
         <h2>A Trusted Name In Nigerian Real Estate</h2>
-        <p style="color:var(--text-soft); margin-bottom:22px;">PineLeaf Estates specializes in land sales, estate development, building construction, property planning and management, documentation, land banking, and investment consultation — with a focus on verified properties across South-East and South-South Nigeria.</p>
+        <p class="muted mb-22">PineLeaf Estates specializes in land sales, estate development, building construction, property planning and management, documentation, land banking, and investment consultation — with a focus on verified properties across South-East and South-South Nigeria.</p>
         <div class="value-list">
           <div class="feature-item">
-            <div class="fi-icon"><i class="fa-solid fa-bullseye"></i></div>
+            <div class="fi-icon"><i class="fa-solid fa-bullseye" aria-hidden="true"></i></div>
             <div><h4>Our Mission</h4><p>To make land ownership secure, transparent, and profitable for every Nigerian investor.</p></div>
           </div>
           <div class="feature-item">
-            <div class="fi-icon"><i class="fa-solid fa-eye"></i></div>
+            <div class="fi-icon"><i class="fa-solid fa-eye" aria-hidden="true"></i></div>
             <div><h4>Our Vision</h4><p>To become West Africa's most trusted real estate and property investment brand.</p></div>
           </div>
         </div>
@@ -203,23 +205,23 @@
 <section class="section section-alt" id="services">
   <div class="container">
     <div class="section-head center reveal">
-      <span class="eyebrow" style="justify-content:center;">What We Do</span>
+      <span class="eyebrow">What We Do</span>
       <h2>End-to-End Real Estate Services</h2>
       <p>From acquisition to documentation, we handle every stage of your property journey.</p>
     </div>
     <div class="grid-3">
       <div class="service-card reveal">
-        <div class="service-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+        <div class="service-icon"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i></div>
         <h3>Property Development &amp; Sales</h3>
         <p>Verified lands across South-East and South-South Nigeria, ready for immediate development.</p>
       </div>
       <div class="service-card reveal reveal-delay-1">
-        <div class="service-icon"><i class="fa-solid fa-city"></i></div>
+        <div class="service-icon"><i class="fa-solid fa-city" aria-hidden="true"></i></div>
         <h3>Estate Development</h3>
         <p>Residential and commercial estates planned for long-term value and secure living.</p>
       </div>
       <div class="service-card reveal reveal-delay-2">
-        <div class="service-icon"><i class="fa-solid fa-file-shield"></i></div>
+        <div class="service-icon"><i class="fa-solid fa-file-shield" aria-hidden="true"></i></div>
         <h3>Title Verification &amp; Documentation</h3>
         <p>Survey plans, C of O assistance, title verification, and full legal documentation.</p>
       </div>
@@ -234,7 +236,7 @@
 <section class="section" id="properties">
   <div class="container">
     <div class="section-head center reveal">
-      <span class="eyebrow" style="justify-content:center;">Featured Listings</span>
+      <span class="eyebrow">Featured Listings</span>
       <h2>Verified Properties Ready For Investment</h2>
       <p>A selection of our current land and estate offerings — every plot comes with verified documentation.</p>
     </div>
@@ -248,23 +250,23 @@
         data-image="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=900&auto=format&fit=crop"
         data-desc="Located in a fast-growing estate with excellent road access, electricity, drainage, and secure surroundings.">
         <div class="pc-media">
-          <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=900&auto=format&fit=crop" alt="Green Valley Estate plot in Awka">
+          <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=900&auto=format&fit=crop" alt="Green Valley Estate plot in Awka" loading="lazy" decoding="async" width="900" height="506">
           <span class="pc-status sale">For Sale</span>
           <div class="pc-actions">
-            <button class="fav" aria-label="Save to favourites"><i class="fa-regular fa-heart"></i></button>
-            <button class="share" aria-label="Share property"><i class="fa-solid fa-share-nodes"></i></button>
+            <button type="button" class="fav" aria-label="Save to favourites"><i class="fa-regular fa-heart" aria-hidden="true"></i></button>
+            <button type="button" class="share" aria-label="Share property"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i></button>
           </div>
         </div>
         <div class="pc-body">
-          <div class="pc-loc"><i class="fa-solid fa-location-dot"></i> Awka, Anambra</div>
+          <div class="pc-loc"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Awka, Anambra</div>
           <h3>Green Valley Estate</h3>
           <div class="pc-price">₦8,500,000 <span>/ plot</span></div>
           <div class="pc-meta">
-            <div><i class="fa-solid fa-ruler-combined"></i> 500 sqm</div>
-            <div><i class="fa-solid fa-house"></i> Residential</div>
+            <div><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i> 500 sqm</div>
+            <div><i class="fa-solid fa-house" aria-hidden="true"></i> Residential</div>
           </div>
           <p class="pc-desc">Excellent road access, electricity, drainage and secure surroundings in a fast-growing estate.</p>
-          <a href="#" class="btn btn-outline-dark btn-block view-details">View Details</a>
+          <button type="button" class="btn btn-outline-dark btn-block view-details">View Details</button>
         </div>
       </div>
 
@@ -275,23 +277,23 @@
         data-image="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=900&auto=format&fit=crop"
         data-desc="Premium estate land with verified documents and excellent infrastructure, minutes from the city centre.">
         <div class="pc-media">
-          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=900&auto=format&fit=crop" alt="Pine Heights Estate plot in Onitsha">
+          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=900&auto=format&fit=crop" alt="Pine Heights Estate plot in Onitsha" loading="lazy" decoding="async" width="900" height="597">
           <span class="pc-status new">New Listing</span>
           <div class="pc-actions">
-            <button class="fav" aria-label="Save to favourites"><i class="fa-regular fa-heart"></i></button>
-            <button class="share" aria-label="Share property"><i class="fa-solid fa-share-nodes"></i></button>
+            <button type="button" class="fav" aria-label="Save to favourites"><i class="fa-regular fa-heart" aria-hidden="true"></i></button>
+            <button type="button" class="share" aria-label="Share property"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i></button>
           </div>
         </div>
         <div class="pc-body">
-          <div class="pc-loc"><i class="fa-solid fa-location-dot"></i> Onitsha</div>
+          <div class="pc-loc"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Onitsha</div>
           <h3>Pine Heights Estate</h3>
           <div class="pc-price">₦12,000,000 <span>/ plot</span></div>
           <div class="pc-meta">
-            <div><i class="fa-solid fa-ruler-combined"></i> 600 sqm</div>
-            <div><i class="fa-solid fa-city"></i> Estate</div>
+            <div><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i> 600 sqm</div>
+            <div><i class="fa-solid fa-city" aria-hidden="true"></i> Estate</div>
           </div>
           <p class="pc-desc">Premium estate land with verified documents and excellent infrastructure.</p>
-          <a href="#" class="btn btn-outline-dark btn-block view-details">View Details</a>
+          <button type="button" class="btn btn-outline-dark btn-block view-details">View Details</button>
         </div>
       </div>
 
@@ -302,23 +304,23 @@
         data-image="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=900&auto=format&fit=crop"
         data-desc="Perfect investment opportunity in a rapidly developing neighbourhood with growing infrastructure.">
         <div class="pc-media">
-          <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=900&auto=format&fit=crop" alt="Emerald Gardens plot in Asaba">
+          <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=900&auto=format&fit=crop" alt="Emerald Gardens plot in Asaba" loading="lazy" decoding="async" width="900" height="755">
           <span class="pc-status sale">For Sale</span>
           <div class="pc-actions">
-            <button class="fav" aria-label="Save to favourites"><i class="fa-regular fa-heart"></i></button>
-            <button class="share" aria-label="Share property"><i class="fa-solid fa-share-nodes"></i></button>
+            <button type="button" class="fav" aria-label="Save to favourites"><i class="fa-regular fa-heart" aria-hidden="true"></i></button>
+            <button type="button" class="share" aria-label="Share property"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i></button>
           </div>
         </div>
         <div class="pc-body">
-          <div class="pc-loc"><i class="fa-solid fa-location-dot"></i> Asaba</div>
+          <div class="pc-loc"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Asaba</div>
           <h3>Emerald Gardens</h3>
           <div class="pc-price">₦5,800,000 <span>/ plot</span></div>
           <div class="pc-meta">
-            <div><i class="fa-solid fa-ruler-combined"></i> 450 sqm</div>
-            <div><i class="fa-solid fa-house"></i> Residential</div>
+            <div><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i> 450 sqm</div>
+            <div><i class="fa-solid fa-house" aria-hidden="true"></i> Residential</div>
           </div>
           <p class="pc-desc">Perfect investment opportunity in a rapidly developing neighbourhood.</p>
-          <a href="#" class="btn btn-outline-dark btn-block view-details">View Details</a>
+          <button type="button" class="btn btn-outline-dark btn-block view-details">View Details</button>
         </div>
       </div>
 
@@ -332,35 +334,35 @@
 <!-- ============ WHY CHOOSE US ============ -->
 <section class="section section-dark">
   <div class="contour-bg"></div>
-  <div class="container" style="position:relative;">
+  <div class="container relative">
     <div class="section-head center reveal">
-      <span class="eyebrow" style="justify-content:center;">Why PineLeaf</span>
+      <span class="eyebrow">Why PineLeaf</span>
       <h2>Built On Trust, Backed By Documentation</h2>
     </div>
     <div class="grid-4">
-      <div class="feature-item reveal"><div class="fi-icon"><i class="fa-solid fa-certificate"></i></div><div><h4>Verified Properties</h4><p>Every plot is inspected and title-verified.</p></div></div>
-      <div class="feature-item reveal reveal-delay-1"><div class="fi-icon"><i class="fa-solid fa-scale-balanced"></i></div><div><h4>Trusted Documentation</h4><p>Survey plans, C of O and legal backing.</p></div></div>
-      <div class="feature-item reveal reveal-delay-2"><div class="fi-icon"><i class="fa-solid fa-tags"></i></div><div><h4>Affordable Prices</h4><p>Transparent pricing with real market value.</p></div></div>
-      <div class="feature-item reveal reveal-delay-3"><div class="fi-icon"><i class="fa-solid fa-credit-card"></i></div><div><h4>Flexible Payment Plans</h4><p>Structured instalments for every budget.</p></div></div>
-      <div class="feature-item reveal"><div class="fi-icon"><i class="fa-solid fa-user-tie"></i></div><div><h4>Professional Team</h4><p>Experienced advisors guiding every step.</p></div></div>
-      <div class="feature-item reveal reveal-delay-1"><div class="fi-icon"><i class="fa-solid fa-headset"></i></div><div><h4>Customer Support</h4><p>Responsive support before and after purchase.</p></div></div>
-      <div class="feature-item reveal reveal-delay-2"><div class="fi-icon"><i class="fa-solid fa-vault"></i></div><div><h4>Secure Investment</h4><p>Your investment protected at every stage.</p></div></div>
-      <div class="feature-item reveal reveal-delay-3"><div class="fi-icon"><i class="fa-solid fa-chart-line"></i></div><div><h4>Proven Appreciation</h4><p>Track record of steady land value growth.</p></div></div>
+      <div class="feature-item reveal"><div class="fi-icon"><i class="fa-solid fa-certificate" aria-hidden="true"></i></div><div><h4>Verified Properties</h4><p>Every plot is inspected and title-verified.</p></div></div>
+      <div class="feature-item reveal reveal-delay-1"><div class="fi-icon"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i></div><div><h4>Trusted Documentation</h4><p>Survey plans, C of O and legal backing.</p></div></div>
+      <div class="feature-item reveal reveal-delay-2"><div class="fi-icon"><i class="fa-solid fa-tags" aria-hidden="true"></i></div><div><h4>Affordable Prices</h4><p>Transparent pricing with real market value.</p></div></div>
+      <div class="feature-item reveal reveal-delay-3"><div class="fi-icon"><i class="fa-solid fa-credit-card" aria-hidden="true"></i></div><div><h4>Flexible Payment Plans</h4><p>Structured instalments for every budget.</p></div></div>
+      <div class="feature-item reveal"><div class="fi-icon"><i class="fa-solid fa-user-tie" aria-hidden="true"></i></div><div><h4>Professional Team</h4><p>Experienced advisors guiding every step.</p></div></div>
+      <div class="feature-item reveal reveal-delay-1"><div class="fi-icon"><i class="fa-solid fa-headset" aria-hidden="true"></i></div><div><h4>Customer Support</h4><p>Responsive support before and after purchase.</p></div></div>
+      <div class="feature-item reveal reveal-delay-2"><div class="fi-icon"><i class="fa-solid fa-vault" aria-hidden="true"></i></div><div><h4>Secure Investment</h4><p>Your investment protected at every stage.</p></div></div>
+      <div class="feature-item reveal reveal-delay-3"><div class="fi-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div><div><h4>Proven Appreciation</h4><p>Track record of steady land value growth.</p></div></div>
     </div>
   </div>
 </section>
 
 <!-- ============ PRRM TEASER ============ -->
-<section class="section" style="background: linear-gradient(160deg, var(--forest-deep), var(--forest));">
+<section class="section section-prrm">
   <div class="contour-bg"></div>
-  <div class="container" style="position:relative;">
-    <div class="cta-band" style="background:none; padding:0;">
+  <div class="container relative">
+    <div class="cta-band cta-plain">
       <div>
-        <span class="eyebrow" style="color:var(--gold-light);">PineLeaf Realtor Reward Model</span>
+        <span class="eyebrow eyebrow-gold">PineLeaf Realtor Reward Model</span>
         <h3>Earn While You Learn Real Estate — Join PRRM</h3>
         <p>Students, professionals, entrepreneurs and aspiring realtors earn 10% commission on every sale they close, plus 4% on referrals.</p>
       </div>
-      <a href="investment.html" class="btn btn-gold">Explore PRRM <i class="fa-solid fa-arrow-right"></i></a>
+      <a href="investment.html" class="btn btn-gold">Explore PRRM <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
     </div>
   </div>
 </section>
@@ -369,37 +371,37 @@
 <section class="section section-alt">
   <div class="container">
     <div class="section-head center reveal">
-      <span class="eyebrow" style="justify-content:center;">Client Stories</span>
+      <span class="eyebrow">Client Stories</span>
       <h2>What Our Investors Say</h2>
     </div>
     <div class="testi-track-wrap reveal">
       <div class="testi-track">
         <div class="testi-slide">
           <div class="testi-card">
-            <div class="testi-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            <div class="testi-stars"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></div>
             <p class="quote">PineLeaf made land buying stress-free. The documentation was verified before I paid a kobo, and the team answered every question I had.</p>
             <div class="testi-person">
-              <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?q=80&w=200&auto=format&fit=crop" alt="Chidinma Eze">
+              <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?q=80&w=200&auto=format&fit=crop" alt="Chidinma Eze" loading="lazy" decoding="async" width="200" height="133">
               <div><b>Chidinma Eze</b><span>Onitsha, Anambra</span></div>
             </div>
           </div>
         </div>
         <div class="testi-slide">
           <div class="testi-card">
-            <div class="testi-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            <div class="testi-stars"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></div>
             <p class="quote">I joined PRRM as a student and closed my first sale within two months. The commission structure and mentorship are genuinely rewarding.</p>
             <div class="testi-person">
-              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop" alt="Emeka Obi">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop" alt="Emeka Obi" loading="lazy" decoding="async" width="200" height="300">
               <div><b>Emeka Obi</b><span>Awka, Anambra</span></div>
             </div>
           </div>
         </div>
         <div class="testi-slide">
           <div class="testi-card">
-            <div class="testi-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            <div class="testi-stars"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></div>
             <p class="quote">Professional from inspection to allocation. My Pine Heights plot has already appreciated significantly in under a year.</p>
             <div class="testi-person">
-              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop" alt="Adaeze Nwosu">
+              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop" alt="Adaeze Nwosu" loading="lazy" decoding="async" width="200" height="300">
               <div><b>Adaeze Nwosu</b><span>Port Harcourt, Rivers</span></div>
             </div>
           </div>
@@ -415,17 +417,19 @@
   <div class="container">
     <div class="cta-band reveal">
       <div class="contour-bg"></div>
-      <div style="position:relative;">
+      <div class="relative">
         <h3>Ready To Own Verified Land In Nigeria?</h3>
         <p>Speak with our advisors today and take the first step toward a secure real estate investment.</p>
       </div>
-      <div style="position:relative; display:flex; gap:14px; flex-wrap:wrap;">
+      <div class="relative btn-row">
         <a href="contact.html" class="btn btn-gold">Book Inspection</a>
         <a href="https://wa.me/2348012345678" target="_blank" rel="noopener" class="btn btn-outline">Chat On WhatsApp</a>
       </div>
     </div>
   </div>
 </section>
+
+</main>
 
 <!-- ============ FOOTER ============ -->
 <footer class="site-footer" id="contact">
@@ -444,10 +448,10 @@
         </a>
         <p>Verified land sales, estate development and real estate investment across South-East and South-South Nigeria.</p>
         <div class="social-row">
-          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
-          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+          <a href="#" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
         </div>
       </div>
       <div class="footer-col">
@@ -471,7 +475,7 @@
       </div>
       <div class="footer-col">
         <h4>Stay Updated</h4>
-        <p style="font-size:.87rem; margin-bottom:16px;">Get new listings and investment tips in your inbox.</p>
+        <p class="fs-xs mb-16">Get new listings and investment tips in your inbox.</p>
         <form class="newsletter-box newsletter-form">
           <input type="email" placeholder="Your email address" required aria-label="Email for newsletter">
           <button class="btn btn-gold btn-sm" type="submit">Join</button>
@@ -487,19 +491,19 @@
 </footer>
 
 <div class="float-stack">
-  <a class="fab whatsapp" href="https://wa.me/2348012345678" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-  <a class="fab email" href="mailto:info@pineleafestates.com.ng" aria-label="Email PineLeaf Estates"><i class="fa-solid fa-envelope"></i></a>
-  <button class="fab top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+  <a class="fab whatsapp" href="https://wa.me/2348012345678" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+  <a class="fab email" href="mailto:info@pineleafestates.com.ng" aria-label="Email PineLeaf Estates"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
+  <button type="button" class="fab top" aria-label="Back to top"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
 </div>
 
 <!-- Property Details Modal -->
-<div class="pmodal" id="propertyModal">
+<div class="pmodal" id="propertyModal" role="dialog" aria-modal="true" aria-labelledby="pmodalTitle" aria-hidden="true">
   <div class="pmodal-box">
-    <button class="pmodal-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    <button type="button" class="pmodal-close" aria-label="Close property details"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
     <div class="pmodal-media"><img src="" alt="Property image"></div>
     <div class="pmodal-body">
-      <div class="pc-loc pmodal-loc"><i class="fa-solid fa-location-dot"></i></div>
-      <h2 class="pmodal-title"></h2>
+      <div class="pc-loc pmodal-loc"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></div>
+      <h2 class="pmodal-title" id="pmodalTitle"></h2>
       <div class="pmodal-grid">
         <div class="pmodal-stat"><span>Price</span><b class="pmodal-price"></b></div>
         <div class="pmodal-stat"><span>Size</span><b class="pmodal-size"></b></div>
@@ -507,7 +511,7 @@
         <div class="pmodal-stat"><span>Status</span><b class="pmodal-status"></b></div>
       </div>
       <h4>Description</h4>
-      <p class="pmodal-desc" style="color:var(--text-soft); font-size:.92rem;"></p>
+      <p class="pmodal-desc muted fs-92"></p>
       <h4>Property Features</h4>
       <ul class="pmodal-feats">
         <li>Verified title documents</li>
@@ -516,12 +520,12 @@
         <li>Fenced &amp; secured perimeter</li>
       </ul>
       <h4>Nearby Landmarks</h4>
-      <p style="color:var(--text-soft); font-size:.92rem;">Close to major markets, schools, and healthcare facilities within the estate axis.</p>
-      <div class="map-embed"><div class="map-pin"><i class="fa-solid fa-map-location-dot"></i><span>Map preview available on inspection</span></div></div>
+      <p class="muted fs-92">Close to major markets, schools, and healthcare facilities within the estate axis.</p>
+      <div class="map-embed"><div class="map-pin"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i><span>Map preview available on inspection</span></div></div>
       <div class="pmodal-actions">
         <a href="contact.html" class="btn btn-primary">Book Inspection</a>
-        <a href="https://wa.me/2348012345678" target="_blank" rel="noopener" class="btn btn-outline-dark"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-        <a href="mailto:info@pineleafestates.com.ng" class="btn btn-outline-dark"><i class="fa-solid fa-envelope"></i> Email</a>
+        <a href="https://wa.me/2348012345678" target="_blank" rel="noopener" class="btn btn-outline-dark"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+        <a href="mailto:info@pineleafestates.com.ng" class="btn btn-outline-dark"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Email</a>
       </div>
     </div>
   </div>

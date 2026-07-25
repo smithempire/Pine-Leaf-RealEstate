@@ -15,8 +15,8 @@
 <div id="preloader"><div class="preload-mark"></div><div class="preload-word">PineLeaf Estates</div></div>
 
 <div class="nav-scrim"></div>
-<div class="mobile-nav">
-  <button class="mobile-close" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+<div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Main menu" aria-hidden="true">
+  <button class="mobile-close" type="button" aria-label="Close menu"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
   <a href="index.html">Home</a>
   <a href="about.html">About Us</a>
   <a href="services.html">Services</a>
@@ -27,7 +27,7 @@
   <a href="investment.html" class="btn btn-gold">Invest Now</a>
 </div>
 
-<header class="site-header scrolled">
+<header class="site-header">
   <div class="container header-inner">
     <a href="index.html" class="brand">
       <svg class="brand-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -49,14 +49,16 @@
       <a href="contact.html">Contact Us</a>
     </nav>
     <div class="header-actions">
-      <a class="icon-btn" href="properties.html" aria-label="Search properties"><i class="fa-solid fa-magnifying-glass"></i></a>
-      <a class="icon-btn" href="https://wa.me/2348012345678" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-      <a class="icon-btn" href="mailto:info@pineleafestates.com.ng" aria-label="Email us"><i class="fa-solid fa-envelope"></i></a>
+      <a class="icon-btn" href="properties.html" aria-label="Search properties"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></a>
+      <a class="icon-btn" href="https://wa.me/2348012345678" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+      <a class="icon-btn" href="mailto:info@pineleafestates.com.ng" aria-label="Email us"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
       <a href="investment.html" class="btn btn-gold btn-sm">Invest Now</a>
-      <button class="hamburger" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+      <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
     </div>
   </div>
 </header>
+
+<main id="main">
 
 <section class="page-hero">
   <div class="contour-bg"></div>
@@ -133,7 +135,7 @@
           <option value="sold">Sold</option>
         </select>
       </div>
-      <button class="btn btn-primary">Search <i class="fa-solid fa-magnifying-glass"></i></button>
+      <button class="btn btn-primary">Search <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>
     </div>
   </div>
 </div>
@@ -149,17 +151,17 @@
         data-image="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=900&auto=format&fit=crop"
         data-desc="Located in a fast-growing estate with excellent road access, electricity, drainage, and secure surroundings.">
         <div class="pc-media">
-          <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=900&auto=format&fit=crop" alt="Green Valley Estate plot in Awka">
+          <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=900&auto=format&fit=crop" alt="Green Valley Estate plot in Awka" loading="lazy" decoding="async" width="900" height="506">
           <span class="pc-status sale">For Sale</span>
-          <div class="pc-actions"><button class="fav" aria-label="Save"><i class="fa-regular fa-heart"></i></button><button class="share" aria-label="Share"><i class="fa-solid fa-share-nodes"></i></button></div>
+          <div class="pc-actions"><button type="button" class="fav" aria-label="Save"><i class="fa-regular fa-heart" aria-hidden="true"></i></button><button type="button" class="share" aria-label="Share"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i></button></div>
         </div>
         <div class="pc-body">
-          <div class="pc-loc"><i class="fa-solid fa-location-dot"></i> Awka, Anambra</div>
+          <div class="pc-loc"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Awka, Anambra</div>
           <h3>Green Valley Estate</h3>
           <div class="pc-price">₦8,500,000 <span>/ plot</span></div>
-          <div class="pc-meta"><div><i class="fa-solid fa-ruler-combined"></i> 500 sqm</div><div><i class="fa-solid fa-house"></i> Residential</div></div>
+          <div class="pc-meta"><div><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i> 500 sqm</div><div><i class="fa-solid fa-house" aria-hidden="true"></i> Residential</div></div>
           <p class="pc-desc">Excellent road access, electricity, drainage and secure surroundings.</p>
-          <a href="#" class="btn btn-outline-dark btn-block view-details">View Details</a>
+          <button type="button" class="btn btn-outline-dark btn-block view-details">View Details</button>
         </div>
       </div>
 
@@ -170,17 +172,17 @@
         data-image="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=900&auto=format&fit=crop"
         data-desc="Premium estate land with verified documents and excellent infrastructure, minutes from the city centre.">
         <div class="pc-media">
-          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=900&auto=format&fit=crop" alt="Pine Heights Estate plot in Onitsha">
+          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=900&auto=format&fit=crop" alt="Pine Heights Estate plot in Onitsha" loading="lazy" decoding="async" width="900" height="597">
           <span class="pc-status new">New Listing</span>
-          <div class="pc-actions"><button class="fav" aria-label="Save"><i class="fa-regular fa-heart"></i></button><button class="share" aria-label="Share"><i class="fa-solid fa-share-nodes"></i></button></div>
+          <div class="pc-actions"><button type="button" class="fav" aria-label="Save"><i class="fa-regular fa-heart" aria-hidden="true"></i></button><button type="button" class="share" aria-label="Share"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i></button></div>
         </div>
         <div class="pc-body">
-          <div class="pc-loc"><i class="fa-solid fa-location-dot"></i> Onitsha</div>
+          <div class="pc-loc"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Onitsha</div>
           <h3>Pine Heights Estate</h3>
           <div class="pc-price">₦12,000,000 <span>/ plot</span></div>
-          <div class="pc-meta"><div><i class="fa-solid fa-ruler-combined"></i> 600 sqm</div><div><i class="fa-solid fa-city"></i> Estate</div></div>
+          <div class="pc-meta"><div><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i> 600 sqm</div><div><i class="fa-solid fa-city" aria-hidden="true"></i> Estate</div></div>
           <p class="pc-desc">Premium estate land with verified documents and excellent infrastructure.</p>
-          <a href="#" class="btn btn-outline-dark btn-block view-details">View Details</a>
+          <button type="button" class="btn btn-outline-dark btn-block view-details">View Details</button>
         </div>
       </div>
 
@@ -191,17 +193,17 @@
         data-image="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=900&auto=format&fit=crop"
         data-desc="Perfect investment opportunity in a rapidly developing neighbourhood with growing infrastructure.">
         <div class="pc-media">
-          <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=900&auto=format&fit=crop" alt="Emerald Gardens plot in Asaba">
+          <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=900&auto=format&fit=crop" alt="Emerald Gardens plot in Asaba" loading="lazy" decoding="async" width="900" height="755">
           <span class="pc-status sale">For Sale</span>
-          <div class="pc-actions"><button class="fav" aria-label="Save"><i class="fa-regular fa-heart"></i></button><button class="share" aria-label="Share"><i class="fa-solid fa-share-nodes"></i></button></div>
+          <div class="pc-actions"><button type="button" class="fav" aria-label="Save"><i class="fa-regular fa-heart" aria-hidden="true"></i></button><button type="button" class="share" aria-label="Share"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i></button></div>
         </div>
         <div class="pc-body">
-          <div class="pc-loc"><i class="fa-solid fa-location-dot"></i> Asaba</div>
+          <div class="pc-loc"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Asaba</div>
           <h3>Emerald Gardens</h3>
           <div class="pc-price">₦5,800,000 <span>/ plot</span></div>
-          <div class="pc-meta"><div><i class="fa-solid fa-ruler-combined"></i> 450 sqm</div><div><i class="fa-solid fa-house"></i> Residential</div></div>
+          <div class="pc-meta"><div><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i> 450 sqm</div><div><i class="fa-solid fa-house" aria-hidden="true"></i> Residential</div></div>
           <p class="pc-desc">Perfect investment opportunity in a rapidly developing neighbourhood.</p>
-          <a href="#" class="btn btn-outline-dark btn-block view-details">View Details</a>
+          <button type="button" class="btn btn-outline-dark btn-block view-details">View Details</button>
         </div>
       </div>
 
@@ -212,17 +214,17 @@
         data-image="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=900&auto=format&fit=crop"
         data-desc="High-visibility commercial frontage along a major expressway, ideal for retail or office development.">
         <div class="pc-media">
-          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=900&auto=format&fit=crop" alt="Commercial land in Port Harcourt">
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=900&auto=format&fit=crop" alt="Commercial land in Port Harcourt" loading="lazy" decoding="async" width="900" height="600">
           <span class="pc-status sale">For Sale</span>
-          <div class="pc-actions"><button class="fav" aria-label="Save"><i class="fa-regular fa-heart"></i></button><button class="share" aria-label="Share"><i class="fa-solid fa-share-nodes"></i></button></div>
+          <div class="pc-actions"><button type="button" class="fav" aria-label="Save"><i class="fa-regular fa-heart" aria-hidden="true"></i></button><button type="button" class="share" aria-label="Share"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i></button></div>
         </div>
         <div class="pc-body">
-          <div class="pc-loc"><i class="fa-solid fa-location-dot"></i> Port Harcourt</div>
+          <div class="pc-loc"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Port Harcourt</div>
           <h3>Harbour View Commercial Plots</h3>
           <div class="pc-price">₦15,000,000 <span>/ plot</span></div>
-          <div class="pc-meta"><div><i class="fa-solid fa-ruler-combined"></i> 900 sqm</div><div><i class="fa-solid fa-building"></i> Commercial</div></div>
+          <div class="pc-meta"><div><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i> 900 sqm</div><div><i class="fa-solid fa-building" aria-hidden="true"></i> Commercial</div></div>
           <p class="pc-desc">High-visibility frontage along a major expressway.</p>
-          <a href="#" class="btn btn-outline-dark btn-block view-details">View Details</a>
+          <button type="button" class="btn btn-outline-dark btn-block view-details">View Details</button>
         </div>
       </div>
 
@@ -233,17 +235,17 @@
         data-image="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=900&auto=format&fit=crop"
         data-desc="Fertile farmland suited for agribusiness or long-term land banking, with clear boundary survey.">
         <div class="pc-media">
-          <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=900&auto=format&fit=crop" alt="Farmland plot in Enugu">
+          <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=900&auto=format&fit=crop" alt="Farmland plot in Enugu" loading="lazy" decoding="async" width="900" height="506">
           <span class="pc-status sale">For Sale</span>
-          <div class="pc-actions"><button class="fav" aria-label="Save"><i class="fa-regular fa-heart"></i></button><button class="share" aria-label="Share"><i class="fa-solid fa-share-nodes"></i></button></div>
+          <div class="pc-actions"><button type="button" class="fav" aria-label="Save"><i class="fa-regular fa-heart" aria-hidden="true"></i></button><button type="button" class="share" aria-label="Share"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i></button></div>
         </div>
         <div class="pc-body">
-          <div class="pc-loc"><i class="fa-solid fa-location-dot"></i> Enugu</div>
+          <div class="pc-loc"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Enugu</div>
           <h3>Golden Acres Farmland</h3>
           <div class="pc-price">₦3,200,000 <span>/ plot</span></div>
-          <div class="pc-meta"><div><i class="fa-solid fa-ruler-combined"></i> 1000 sqm+</div><div><i class="fa-solid fa-seedling"></i> Farm Land</div></div>
+          <div class="pc-meta"><div><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i> 1000 sqm+</div><div><i class="fa-solid fa-seedling" aria-hidden="true"></i> Farm Land</div></div>
           <p class="pc-desc">Fertile farmland suited for agribusiness or land banking.</p>
-          <a href="#" class="btn btn-outline-dark btn-block view-details">View Details</a>
+          <button type="button" class="btn btn-outline-dark btn-block view-details">View Details</button>
         </div>
       </div>
 
@@ -254,17 +256,17 @@
         data-image="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=900&auto=format&fit=crop"
         data-desc="Serviced plots pre-approved for duplex construction inside a secured, gated estate.">
         <div class="pc-media">
-          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=900&auto=format&fit=crop" alt="Duplex plot in Benin City">
+          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=900&auto=format&fit=crop" alt="Duplex plot in Benin City" loading="lazy" decoding="async" width="900" height="597">
           <span class="pc-status new">New Listing</span>
-          <div class="pc-actions"><button class="fav" aria-label="Save"><i class="fa-regular fa-heart"></i></button><button class="share" aria-label="Share"><i class="fa-solid fa-share-nodes"></i></button></div>
+          <div class="pc-actions"><button type="button" class="fav" aria-label="Save"><i class="fa-regular fa-heart" aria-hidden="true"></i></button><button type="button" class="share" aria-label="Share"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i></button></div>
         </div>
         <div class="pc-body">
-          <div class="pc-loc"><i class="fa-solid fa-location-dot"></i> Benin City</div>
+          <div class="pc-loc"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Benin City</div>
           <h3>Royal Palm Duplex Plots</h3>
           <div class="pc-price">₦22,000,000 <span>/ plot</span></div>
-          <div class="pc-meta"><div><i class="fa-solid fa-ruler-combined"></i> 600 sqm</div><div><i class="fa-solid fa-house-chimney"></i> Duplex</div></div>
+          <div class="pc-meta"><div><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i> 600 sqm</div><div><i class="fa-solid fa-house-chimney" aria-hidden="true"></i> Duplex</div></div>
           <p class="pc-desc">Serviced plots pre-approved for duplex construction.</p>
-          <a href="#" class="btn btn-outline-dark btn-block view-details">View Details</a>
+          <button type="button" class="btn btn-outline-dark btn-block view-details">View Details</button>
         </div>
       </div>
 
@@ -275,17 +277,17 @@
         data-image="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=900&auto=format&fit=crop"
         data-desc="Scenic bungalow plots close to the waterfront, ideal for family homes with resale upside.">
         <div class="pc-media">
-          <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=900&auto=format&fit=crop" alt="Bungalow plot in Calabar">
+          <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=900&auto=format&fit=crop" alt="Bungalow plot in Calabar" loading="lazy" decoding="async" width="900" height="755">
           <span class="pc-status sale">For Sale</span>
-          <div class="pc-actions"><button class="fav" aria-label="Save"><i class="fa-regular fa-heart"></i></button><button class="share" aria-label="Share"><i class="fa-solid fa-share-nodes"></i></button></div>
+          <div class="pc-actions"><button type="button" class="fav" aria-label="Save"><i class="fa-regular fa-heart" aria-hidden="true"></i></button><button type="button" class="share" aria-label="Share"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i></button></div>
         </div>
         <div class="pc-body">
-          <div class="pc-loc"><i class="fa-solid fa-location-dot"></i> Calabar</div>
+          <div class="pc-loc"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Calabar</div>
           <h3>Coral Bay Bungalow Estate</h3>
           <div class="pc-price">₦9,800,000 <span>/ plot</span></div>
-          <div class="pc-meta"><div><i class="fa-solid fa-ruler-combined"></i> 450 sqm</div><div><i class="fa-solid fa-house"></i> Bungalow</div></div>
+          <div class="pc-meta"><div><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i> 450 sqm</div><div><i class="fa-solid fa-house" aria-hidden="true"></i> Bungalow</div></div>
           <p class="pc-desc">Scenic plots close to the waterfront, ideal for family homes.</p>
-          <a href="#" class="btn btn-outline-dark btn-block view-details">View Details</a>
+          <button type="button" class="btn btn-outline-dark btn-block view-details">View Details</button>
         </div>
       </div>
 
@@ -296,17 +298,17 @@
         data-image="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=900&auto=format&fit=crop"
         data-desc="Compact office plots within a planned business district, close to the state capital's core.">
         <div class="pc-media">
-          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=900&auto=format&fit=crop" alt="Office plot in Uyo">
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=900&auto=format&fit=crop" alt="Office plot in Uyo" loading="lazy" decoding="async" width="900" height="600">
           <span class="pc-status sale">For Sale</span>
-          <div class="pc-actions"><button class="fav" aria-label="Save"><i class="fa-regular fa-heart"></i></button><button class="share" aria-label="Share"><i class="fa-solid fa-share-nodes"></i></button></div>
+          <div class="pc-actions"><button type="button" class="fav" aria-label="Save"><i class="fa-regular fa-heart" aria-hidden="true"></i></button><button type="button" class="share" aria-label="Share"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i></button></div>
         </div>
         <div class="pc-body">
-          <div class="pc-loc"><i class="fa-solid fa-location-dot"></i> Uyo</div>
+          <div class="pc-loc"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Uyo</div>
           <h3>Uyo Business Court Offices</h3>
           <div class="pc-price">₦6,500,000 <span>/ plot</span></div>
-          <div class="pc-meta"><div><i class="fa-solid fa-ruler-combined"></i> 300 sqm</div><div><i class="fa-solid fa-briefcase"></i> Office Space</div></div>
+          <div class="pc-meta"><div><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i> 300 sqm</div><div><i class="fa-solid fa-briefcase" aria-hidden="true"></i> Office Space</div></div>
           <p class="pc-desc">Compact office plots within a planned business district.</p>
-          <a href="#" class="btn btn-outline-dark btn-block view-details">View Details</a>
+          <button type="button" class="btn btn-outline-dark btn-block view-details">View Details</button>
         </div>
       </div>
 
@@ -317,17 +319,17 @@
         data-image="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=900&auto=format&fit=crop"
         data-desc="Shop-ready plots inside a high-traffic commercial layout — fully allocated to happy investors.">
         <div class="pc-media">
-          <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=900&auto=format&fit=crop" alt="Shop plots in Aba">
+          <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=900&auto=format&fit=crop" alt="Shop plots in Aba" loading="lazy" decoding="async" width="900" height="675">
           <span class="pc-status sold">Sold</span>
-          <div class="pc-actions"><button class="fav" aria-label="Save"><i class="fa-regular fa-heart"></i></button><button class="share" aria-label="Share"><i class="fa-solid fa-share-nodes"></i></button></div>
+          <div class="pc-actions"><button type="button" class="fav" aria-label="Save"><i class="fa-regular fa-heart" aria-hidden="true"></i></button><button type="button" class="share" aria-label="Share"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i></button></div>
         </div>
         <div class="pc-body">
-          <div class="pc-loc"><i class="fa-solid fa-location-dot"></i> Aba</div>
+          <div class="pc-loc"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Aba</div>
           <h3>Aba Market Shop Plots</h3>
           <div class="pc-price">₦4,200,000 <span>/ plot</span></div>
-          <div class="pc-meta"><div><i class="fa-solid fa-ruler-combined"></i> 300 sqm</div><div><i class="fa-solid fa-shop"></i> Shops</div></div>
+          <div class="pc-meta"><div><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i> 300 sqm</div><div><i class="fa-solid fa-shop" aria-hidden="true"></i> Shops</div></div>
           <p class="pc-desc">Shop-ready plots inside a high-traffic commercial layout.</p>
-          <a href="#" class="btn btn-outline-dark btn-block view-details">View Details</a>
+          <button type="button" class="btn btn-outline-dark btn-block view-details">View Details</button>
         </div>
       </div>
 
@@ -338,29 +340,31 @@
         data-image="https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=900&auto=format&fit=crop"
         data-desc="Entry-level residential plots inside a fenced and gated layout, ideal for first-time buyers.">
         <div class="pc-media">
-          <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=900&auto=format&fit=crop" alt="Residential plot in Owerri">
+          <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=900&auto=format&fit=crop" alt="Residential plot in Owerri" loading="lazy" decoding="async" width="900" height="600">
           <span class="pc-status sale">For Sale</span>
-          <div class="pc-actions"><button class="fav" aria-label="Save"><i class="fa-regular fa-heart"></i></button><button class="share" aria-label="Share"><i class="fa-solid fa-share-nodes"></i></button></div>
+          <div class="pc-actions"><button type="button" class="fav" aria-label="Save"><i class="fa-regular fa-heart" aria-hidden="true"></i></button><button type="button" class="share" aria-label="Share"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i></button></div>
         </div>
         <div class="pc-body">
-          <div class="pc-loc"><i class="fa-solid fa-location-dot"></i> Owerri</div>
+          <div class="pc-loc"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Owerri</div>
           <h3>Owerri Garden Plots</h3>
           <div class="pc-price">₦2,600,000 <span>/ plot</span></div>
-          <div class="pc-meta"><div><i class="fa-solid fa-ruler-combined"></i> 300 sqm</div><div><i class="fa-solid fa-house"></i> Residential</div></div>
+          <div class="pc-meta"><div><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i> 300 sqm</div><div><i class="fa-solid fa-house" aria-hidden="true"></i> Residential</div></div>
           <p class="pc-desc">Entry-level plots inside a fenced, gated layout.</p>
-          <a href="#" class="btn btn-outline-dark btn-block view-details">View Details</a>
+          <button type="button" class="btn btn-outline-dark btn-block view-details">View Details</button>
         </div>
       </div>
 
     </div>
 
     <div class="no-results">
-      <i class="fa-solid fa-magnifying-glass" style="font-size:2rem; color:var(--emerald); margin-bottom:14px; display:block;"></i>
+      <i class="fa-solid fa-magnifying-glass no-results-icon" aria-hidden="true"></i>
       <h3>No properties match your search</h3>
       <p>Try adjusting your filters or contact us for off-market listings.</p>
     </div>
   </div>
 </section>
+
+</main>
 
 <footer class="site-footer">
   <div class="container">
@@ -378,10 +382,10 @@
         </a>
         <p>Verified land sales, estate development and real estate investment across South-East and South-South Nigeria.</p>
         <div class="social-row">
-          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
-          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+          <a href="#" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
         </div>
       </div>
       <div class="footer-col">
@@ -405,7 +409,7 @@
       </div>
       <div class="footer-col">
         <h4>Stay Updated</h4>
-        <p style="font-size:.87rem; margin-bottom:16px;">Get new listings and investment tips in your inbox.</p>
+        <p class="fs-xs mb-16">Get new listings and investment tips in your inbox.</p>
         <form class="newsletter-box newsletter-form">
           <input type="email" placeholder="Your email address" required aria-label="Email for newsletter">
           <button class="btn btn-gold btn-sm" type="submit">Join</button>
@@ -421,18 +425,18 @@
 </footer>
 
 <div class="float-stack">
-  <a class="fab whatsapp" href="https://wa.me/2348012345678" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-  <a class="fab email" href="mailto:info@pineleafestates.com.ng" aria-label="Email PineLeaf Estates"><i class="fa-solid fa-envelope"></i></a>
-  <button class="fab top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+  <a class="fab whatsapp" href="https://wa.me/2348012345678" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+  <a class="fab email" href="mailto:info@pineleafestates.com.ng" aria-label="Email PineLeaf Estates"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
+  <button type="button" class="fab top" aria-label="Back to top"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
 </div>
 
-<div class="pmodal" id="propertyModal">
+<div class="pmodal" id="propertyModal" role="dialog" aria-modal="true" aria-labelledby="pmodalTitle" aria-hidden="true">
   <div class="pmodal-box">
-    <button class="pmodal-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    <button type="button" class="pmodal-close" aria-label="Close property details"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
     <div class="pmodal-media"><img src="" alt="Property image"></div>
     <div class="pmodal-body">
-      <div class="pc-loc pmodal-loc"><i class="fa-solid fa-location-dot"></i></div>
-      <h2 class="pmodal-title"></h2>
+      <div class="pc-loc pmodal-loc"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></div>
+      <h2 class="pmodal-title" id="pmodalTitle"></h2>
       <div class="pmodal-grid">
         <div class="pmodal-stat"><span>Price</span><b class="pmodal-price"></b></div>
         <div class="pmodal-stat"><span>Size</span><b class="pmodal-size"></b></div>
@@ -440,7 +444,7 @@
         <div class="pmodal-stat"><span>Status</span><b class="pmodal-status"></b></div>
       </div>
       <h4>Description</h4>
-      <p class="pmodal-desc" style="color:var(--text-soft); font-size:.92rem;"></p>
+      <p class="pmodal-desc muted fs-92"></p>
       <h4>Property Features</h4>
       <ul class="pmodal-feats">
         <li>Verified title documents</li>
@@ -449,12 +453,12 @@
         <li>Fenced &amp; secured perimeter</li>
       </ul>
       <h4>Nearby Landmarks</h4>
-      <p style="color:var(--text-soft); font-size:.92rem;">Close to major markets, schools, and healthcare facilities within the estate axis.</p>
-      <div class="map-embed"><div class="map-pin"><i class="fa-solid fa-map-location-dot"></i><span>Map preview available on inspection</span></div></div>
+      <p class="muted fs-92">Close to major markets, schools, and healthcare facilities within the estate axis.</p>
+      <div class="map-embed"><div class="map-pin"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i><span>Map preview available on inspection</span></div></div>
       <div class="pmodal-actions">
         <a href="contact.html" class="btn btn-primary">Book Inspection</a>
-        <a href="https://wa.me/2348012345678" target="_blank" rel="noopener" class="btn btn-outline-dark"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-        <a href="mailto:info@pineleafestates.com.ng" class="btn btn-outline-dark"><i class="fa-solid fa-envelope"></i> Email</a>
+        <a href="https://wa.me/2348012345678" target="_blank" rel="noopener" class="btn btn-outline-dark"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+        <a href="mailto:info@pineleafestates.com.ng" class="btn btn-outline-dark"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Email</a>
       </div>
     </div>
   </div>

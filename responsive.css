@@ -1,56 +1,232 @@
 /* ============================================================
-   PineLeaf Estates — Responsive Rules
+   PineLeaf Estates — Responsive Layer
+   ------------------------------------------------------------
+   MOBILE-FIRST. style.css holds the small-screen baseline; every
+   rule here is a min-width enhancement layered on top of it.
+   Breakpoints:
+     420px   large phones
+     576px   phablet
+     640px   two-column card grids
+     768px   tablet portrait
+     992px   desktop navigation appears
+     1200px  wide desktop / hero float card
+     1400px  large desktop
+   Ordered smallest -> largest so later rules win naturally and
+   no !important overrides are needed.
    ============================================================ */
 
-@media (max-width: 1180px){
-  .grid-4{ grid-template-columns: repeat(2,1fr); }
-  .footer-grid{ grid-template-columns: 1.4fr 1fr 1fr; }
-  .footer-grid .footer-col:last-child{ grid-column: 1/-1; max-width:420px; }
+/* ============================================================
+   420px — large phones
+   ============================================================ */
+@media (min-width: 420px){
+  :root{ --pad-x: 20px; --section-y: 68px; }
+
+  .brand-name{ font-size:1.14rem; }
+  .hero-btns .btn{ flex:0 1 auto; }
+  .newsletter-box{ flex-direction:row; align-items:center; }
+  .newsletter-box button{ width:auto; }
+  .cta-band .btn-row .btn{ flex:0 1 auto; }
 }
 
-@media (max-width: 1024px){
-  .search-panel .grid{ grid-template-columns: repeat(3,1fr); }
-  .search-panel .grid > .field:nth-child(4),
-  .search-panel .grid > .field:nth-child(5){ grid-column: span 1; }
-  .grid-3{ grid-template-columns: repeat(2,1fr); }
-  .masonry{ column-count:2; }
-  .hero-float-card{ display:none; }
-  .prrm-steps{ grid-template-columns: 1fr; }
-  .about-grid, .value-grid{ grid-template-columns: 1fr !important; }
+/* ============================================================
+   576px — phablet: secondary header icons return
+   ============================================================ */
+@media (min-width: 576px){
+  :root{ --pad-x: 24px; --section-y: 76px; --header-h: 78px; }
+
+  /* Header CTA reappears once there is room beside the hamburger. */
+  .header-actions{ gap:12px; }
+  .header-actions .btn{ display:inline-flex; }
+
+  .hero-stats{ gap:22px 18px; }
+  .search-panel{ padding:24px; }
+  .form-row{ grid-template-columns:1fr 1fr; gap:0 18px; }
+  .pmodal-body{ padding:28px; }
+  .pmodal-actions{ flex-direction:row; flex-wrap:wrap; }
+  .pmodal-actions .btn{ width:auto; flex:1 1 auto; }
+  .footer-bottom{ flex-direction:row; text-align:left; }
+  .fab{ width:52px; height:52px; font-size:1.2rem; }
+  .float-stack{ right: calc(16px + var(--safe-r)); bottom: calc(16px + var(--safe-b)); }
+  .gallery-filters{ flex-wrap:wrap; overflow-x:visible; }
 }
 
-@media (max-width: 900px){
-  .main-nav{ display:none; }
-  .hamburger{ display:flex; }
-  .hero-stats{ grid-template-columns: repeat(2,1fr); row-gap:26px; }
-  .grid-2, .footer-grid{ grid-template-columns: 1fr; }
-  .form-row{ grid-template-columns: 1fr; }
-  .cta-band{ padding:42px; flex-direction:column; text-align:center; }
-  .pmodal-grid{ grid-template-columns: repeat(2,1fr); }
+/* ============================================================
+   640px — two-column card grids
+   ============================================================ */
+@media (min-width: 640px){
+  .grid-3, .grid-4{ grid-template-columns: repeat(2, 1fr); gap:24px; }
+  .masonry{ column-count:2; column-gap:18px; }
+  .masonry-item{ margin-bottom:18px; }
+  .pmodal-feats{ grid-template-columns:1fr 1fr; }
+  .calc-results{ grid-template-columns:1fr 1fr; }
+  .search-panel .grid{ grid-template-columns: repeat(2, 1fr); }
+  .search-panel .btn{ grid-column:1/-1; }
+  .cta-band{ padding:36px 32px; }
+  .fab.email{ display:flex; }
 }
 
-@media (max-width: 720px){
-  .section{ padding:76px 0; }
-  .grid-3, .grid-4{ grid-template-columns: 1fr; }
-  .masonry{ column-count:1; }
-  .search-panel{ padding:24px; margin-top:-50px; }
-  .search-panel .grid{ grid-template-columns: 1fr; }
-  .about-float{ position:static; margin-top:20px; display:inline-block; }
-  .calc-results{ grid-template-columns:1fr; }
-  .pmodal-feats{ grid-template-columns:1fr; }
-  .pmodal-grid{ grid-template-columns: repeat(2,1fr); }
-  .footer-bottom{ flex-direction:column; text-align:center; }
-  .hero{ min-height:92vh; }
-  .hero-arrows{ display:none; }
+/* ============================================================
+   768px — tablet portrait
+   ============================================================ */
+@media (min-width: 768px){
+  :root{ --pad-x: 28px; --section-y: 88px; }
+
+  .icon-btn{ display:flex; }
+
+  /* The search panel starts overlapping the hero here. One variable drives
+     the panel's negative margin, the hero's reserved bottom strip and the
+     arrow offset, so the panel can never cover the slider controls. */
+  :root{ --hero-overlap: 64px; }
+  .hero-inner{ padding-top: calc(var(--header-h) + 40px); }
+  .hero-stats{ grid-template-columns: repeat(4,1fr); padding-top:30px; }
+  .hero p.lead{ font-size:1.08rem; }
+  .hero-btns{ gap:16px; margin-bottom:52px; }
+
+  .page-hero{ padding: calc(var(--header-h) + 56px) 0 68px; }
+
+  /* Overlap the hero again now the screen is tall/wide enough for it. */
+  .search-panel{ margin-top: calc(-1 * var(--hero-overlap)); padding:28px; }
+  .search-panel .grid{ grid-template-columns: repeat(3, 1fr); }
+  .search-panel .btn{ grid-column:1/-1; width:auto; justify-self:start; padding-inline:34px; }
+
+  .grid-2{ grid-template-columns: repeat(2, 1fr); gap:28px; }
+  .prrm-steps{ grid-template-columns: repeat(3,1fr); gap:20px; }
+  .footer-grid{ grid-template-columns: 1.5fr 1fr; gap:36px 40px; padding-bottom:44px; }
+
+  .cta-band{ flex-direction:row; align-items:center; justify-content:space-between; gap:30px; padding:44px 40px; }
+  .cta-band .btn-row{ width:auto; }
+
+  .pmodal{ padding:24px; }
+  .pmodal-media{ aspect-ratio:16/9; max-height:40vh; }
+  .pmodal-grid{ grid-template-columns: repeat(4,1fr); }
+
+  .lightbox{ padding:80px 76px; }
+  .lightbox-prev{ left:24px; top:50%; bottom:auto; transform:translateY(-50%); }
+  .lightbox-next{ right:24px; top:50%; bottom:auto; transform:translateY(-50%); }
+  .lightbox-caption{ padding:0 24px; }
+
+  .testi-card{ padding:36px 32px; }
+  .testi-card p.quote{ font-size:1.08rem; }
+
+  .service-card{ padding:32px 26px; }
+  .form-card, .calc-box{ padding:32px 28px; }
+  .map-embed{ height:260px; }
+  .about-float{
+    position:absolute; bottom:-26px; left:-18px; margin-top:0; padding:22px 26px;
+  }
+  .about-float b{ font-size:1.9rem; }
 }
 
-@media (max-width: 480px){
-  .container{ padding:0 18px; }
-  .hero h1{ font-size:2.1rem; }
-  .hero-btns{ flex-direction:column; }
-  .hero-btns .btn{ width:100%; }
-  .btn{ padding:14px 24px; }
-  .pmodal-grid{ grid-template-columns: repeat(2,1fr); }
-  .float-stack{ right:16px; bottom:16px; }
-  .fab{ width:50px; height:50px; font-size:1.1rem; }
+/* ============================================================
+   992px — desktop navigation
+   ============================================================ */
+@media (min-width: 992px){
+  :root{ --pad-x: 24px; --section-y: 100px; --header-h: 88px; --hero-overlap: 80px; }
+
+  .site-header{ padding:18px 0; }
+  .site-header.scrolled{ padding:12px 0; }
+  .header-inner{ gap:20px; }
+  .brand-mark{ width:44px; height:44px; }
+  /* The brand is the one element that must never be clipped — let the
+     navigation absorb any shortfall instead. */
+  .brand{ flex-shrink:0; }
+  .brand-name{ font-size:1.24rem; overflow:visible; text-overflow:clip; }
+
+  .main-nav{ display:flex; min-width:0; }
+  .hamburger{ display:none; }
+  .header-actions{ gap:12px; }
+  /* Seven nav links plus the CTA already fill this band; the secondary
+     icons return at 1200px where there is real room for them. */
+  .icon-btn{ display:none; }
+
+  .grid-3{ grid-template-columns: repeat(3, 1fr); gap:28px; }
+  .grid-4{ grid-template-columns: repeat(2, 1fr); gap:26px; }
+  .masonry{ column-count:3; column-gap:22px; }
+  .masonry-item{ margin-bottom:22px; }
+  /* Captions revert to hover-reveal where a real pointer exists. */
+  .masonry-overlay{ opacity:0; }
+  .masonry-item:hover .masonry-overlay{ opacity:1; }
+
+  .search-panel{ margin-top: calc(-1 * var(--hero-overlap)); padding:32px; }
+  .search-panel .grid{ grid-template-columns: repeat(5, 1fr); }
+  .search-panel .btn{ grid-column:1/-1; }
+
+  .footer-grid{ grid-template-columns: 1.6fr 1fr 1fr; gap:44px; }
+  .footer-grid .footer-col:last-child{ grid-column:1/-1; max-width:460px; }
+
+  .hero-arrows{ display:flex; }
+  .cta-band{ padding:52px 48px; }
+  .form-card, .calc-box{ padding:40px; }
+  .map-embed{ height:280px; }
+  .section-head{ margin-bottom:52px; }
+  .testi-card{ padding:44px; }
+}
+
+/* ============================================================
+   1200px — wide desktop
+   ============================================================ */
+@media (min-width: 1200px){
+  :root{ --section-y: 110px; }
+
+  .icon-btn{ display:flex; }
+  .brand-name{ font-size:1.28rem; }
+  .grid-4{ grid-template-columns: repeat(4, 1fr); gap:28px; }
+  .search-panel .grid{ grid-template-columns: repeat(5, 1fr) auto; align-items:end; }
+  .search-panel .btn{ grid-column:auto; min-height:52px; }
+  .footer-grid{ grid-template-columns: 1.6fr 1fr 1fr 1.3fr; gap:50px; }
+  .footer-grid .footer-col:last-child{ grid-column:auto; max-width:none; }
+
+  /* Enough room for the floating card without covering hero copy. */
+  .hero-float-card{ display:block; bottom: calc(var(--hero-overlap) + 24px); }
+}
+
+/* ============================================================
+   1400px — large desktop
+   ============================================================ */
+@media (min-width: 1400px){
+  :root{ --pad-x: 32px; }
+  .grid-3{ gap:32px; }
+  .cta-band{ padding:60px; }
+}
+
+/* ============================================================
+   Short landscape phones — reclaim vertical space
+   ============================================================ */
+@media (max-height: 520px) and (orientation: landscape){
+  .hero{ min-height:auto; }
+  .hero-inner{ padding-top: calc(var(--header-h) + 24px); padding-bottom:56px; }
+  .hero-stats{ grid-template-columns: repeat(4,1fr); gap:12px; padding-top:18px; }
+  .hero h1{ font-size:1.75rem; }
+  .hero p.lead{ margin-bottom:18px; }
+  .mobile-nav{ padding-top:70px; gap:8px; }
+  .mobile-nav a{ font-size:1.02rem; min-height:40px; padding:2px 0; }
+  .pmodal-media{ max-height:50vh; }
+}
+
+/* ============================================================
+   Pointer-coarse refinements — touch devices of any width
+   ============================================================ */
+@media (hover: none){
+  /* Hover transforms are pointless on touch and cause sticky states. */
+  .property-card:hover{ transform:none; box-shadow: var(--shadow-sm); }
+  .property-card:hover .pc-media img{ transform:none; }
+  .service-card:hover{ transform:none; }
+  .btn-primary:hover, .btn-gold:hover{ transform:none; }
+  .masonry-item:hover img{ transform:none; }
+  .fab:hover{ transform:none; }
+}
+
+/* ============================================================
+   Print
+   ============================================================ */
+@media print{
+  .site-header, .mobile-nav, .nav-scrim, .float-stack, .hero-dots,
+  .hero-arrows, .skip-link, .pmodal, .lightbox, .search-panel,
+  .gallery-filters, .testi-controls{ display:none !important; }
+  body{ color:#000; background:#fff; }
+  .section, .page-hero{ padding:18px 0; }
+  .page-hero, .section-dark, .site-footer{ background:none !important; color:#000 !important; }
+  .page-hero h1, .section-dark h2, .section-dark h3, .section-dark h4{ color:#000 !important; }
+  a[href^="http"]::after{ content:" (" attr(href) ")"; font-size:.75rem; word-break:break-all; }
+  .property-card, .service-card{ break-inside:avoid; box-shadow:none; border:1px solid #ccc; }
 }
