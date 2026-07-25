@@ -1,0 +1,56 @@
+/* ============================================================
+   PineLeaf Estates — Responsive Rules
+   ============================================================ */
+
+@media (max-width: 1180px){
+  .grid-4{ grid-template-columns: repeat(2,1fr); }
+  .footer-grid{ grid-template-columns: 1.4fr 1fr 1fr; }
+  .footer-grid .footer-col:last-child{ grid-column: 1/-1; max-width:420px; }
+}
+
+@media (max-width: 1024px){
+  .search-panel .grid{ grid-template-columns: repeat(3,1fr); }
+  .search-panel .grid > .field:nth-child(4),
+  .search-panel .grid > .field:nth-child(5){ grid-column: span 1; }
+  .grid-3{ grid-template-columns: repeat(2,1fr); }
+  .masonry{ column-count:2; }
+  .hero-float-card{ display:none; }
+  .prrm-steps{ grid-template-columns: 1fr; }
+  .about-grid, .value-grid{ grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 900px){
+  .main-nav{ display:none; }
+  .hamburger{ display:flex; }
+  .hero-stats{ grid-template-columns: repeat(2,1fr); row-gap:26px; }
+  .grid-2, .footer-grid{ grid-template-columns: 1fr; }
+  .form-row{ grid-template-columns: 1fr; }
+  .cta-band{ padding:42px; flex-direction:column; text-align:center; }
+  .pmodal-grid{ grid-template-columns: repeat(2,1fr); }
+}
+
+@media (max-width: 720px){
+  .section{ padding:76px 0; }
+  .grid-3, .grid-4{ grid-template-columns: 1fr; }
+  .masonry{ column-count:1; }
+  .search-panel{ padding:24px; margin-top:-50px; }
+  .search-panel .grid{ grid-template-columns: 1fr; }
+  .about-float{ position:static; margin-top:20px; display:inline-block; }
+  .calc-results{ grid-template-columns:1fr; }
+  .pmodal-feats{ grid-template-columns:1fr; }
+  .pmodal-grid{ grid-template-columns: repeat(2,1fr); }
+  .footer-bottom{ flex-direction:column; text-align:center; }
+  .hero{ min-height:92vh; }
+  .hero-arrows{ display:none; }
+}
+
+@media (max-width: 480px){
+  .container{ padding:0 18px; }
+  .hero h1{ font-size:2.1rem; }
+  .hero-btns{ flex-direction:column; }
+  .hero-btns .btn{ width:100%; }
+  .btn{ padding:14px 24px; }
+  .pmodal-grid{ grid-template-columns: repeat(2,1fr); }
+  .float-stack{ right:16px; bottom:16px; }
+  .fab{ width:50px; height:50px; font-size:1.1rem; }
+}
