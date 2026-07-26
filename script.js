@@ -565,8 +565,23 @@
     selectScrim = document.createElement('div');
     selectScrim.className = 'cselect-scrim';
     document.body.appendChild(selectScrim);
-    selectScrim.addEventListener('click', function () {
-      if (openSelect) openSelect.close();
+    selectScrim.addEventListener('click', function (e) {
+      if (!openSelect) return;
+      /* Work out what the tap actually landed on before dismissing, while
+         the page is still visually in place. If it was another field's
+         trigger, chain straight to it — otherwise a form of five stacked
+         filters costs two taps per field. */
+      var next = null;
+      if (e.clientX || e.clientY) {
+        selectScrim.style.pointerEvents = 'none';
+        var under = document.elementFromPoint(e.clientX, e.clientY);
+        selectScrim.style.pointerEvents = '';
+        next = (under && under.closest) ? under.closest('.cselect-btn') : null;
+        /* Tapping the open field's own trigger means "close", not "reopen". */
+        if (next && openSelect.root.contains(next)) next = null;
+      }
+      openSelect.close();
+      if (next) window.setTimeout(function () { next.click(); }, 60);
     });
 
     selects.forEach(buildCustomSelect);
@@ -580,8 +595,15 @@
       if (openSelect.panel && openSelect.panel.contains(e.target)) return;
       openSelect.close();
     });
+    /* An anchored dropdown must close on resize because its anchor moves.
+       A bottom sheet is anchored to the viewport, so it does not — and
+       mobile browsers fire resize constantly as the address bar hides or a
+       keyboard opens, which was slamming the sheet shut mid-selection.
+       Only close a sheet if the presentation mode itself has changed. */
     window.addEventListener('resize', function () {
-      if (openSelect) openSelect.close(false);
+      if (!openSelect) return;
+      var wasSheet = openSelect.openedAsSheet;
+      if (!wasSheet || wasSheet !== isSheetMode()) openSelect.close(false);
     });
   }
 
@@ -710,6 +732,9 @@
       if (isOpen) return;
       if (openSelect && openSelect !== api) openSelect.close(false);
       isOpen = true;
+      /* Remember which presentation was used, so a later resize can tell a
+         genuine mode change from routine mobile browser-chrome noise. */
+      api.openedAsSheet = isSheetMode();
 
       if (isSheetMode()) {
         /* Bottom sheet: anchoring is irrelevant, but the page behind it
@@ -799,7 +824,7 @@
     /* Reflect programmatic changes (URL seeding, form reset). */
     select.addEventListener('change', syncFromNative);
 
-    var api = { root: root, panel: panel, close: close, open: open };
+    var api = { root: root, panel: panel, close: close, open: open, openedAsSheet: false };
     syncFromNative();
   }
 
