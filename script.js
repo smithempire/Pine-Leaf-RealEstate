@@ -24,6 +24,29 @@
 
   var FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
 
+  /* Focusing an element scrolls it into view, which is how an overlay that
+     restores focus on close can yank the page back later. Always focus
+     without scrolling. */
+  function focusNoScroll(el) {
+    if (!el) return;
+    try { el.focus({ preventScroll: true }); }
+    catch (e) { el.focus(); }
+  }
+
+  /* Which input device drove the last interaction. Returning focus to the
+     trigger matters for keyboard users; for touch/mouse it only leaves a
+     stray focus ring on a control the visitor has already scrolled past. */
+  var keyboardMode = false;
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Tab' || e.key === 'Escape' || e.key === 'Enter' ||
+        e.key === ' ' || e.key.indexOf('Arrow') === 0 || e.key === 'Home' || e.key === 'End') {
+      keyboardMode = true;
+    }
+  }, true);
+  ['pointerdown', 'mousedown', 'touchstart'].forEach(function (evt) {
+    document.addEventListener(evt, function () { keyboardMode = false; }, true);
+  });
+
   /* Counter-based scroll lock.
      Overlays can legitimately stack (e.g. drawer open, then a modal).
      Releasing one must not unlock the page while another is still open,
@@ -128,7 +151,7 @@
       nav.removeAttribute('aria-hidden');
       ScrollLock.lock();
       var target = closeBtn || $(FOCUSABLE, nav);
-      if (target) target.focus();
+      focusNoScroll(target);
     }
 
     function close(returnFocus) {
@@ -139,7 +162,7 @@
       hamburger.setAttribute('aria-expanded', 'false');
       nav.setAttribute('aria-hidden', 'true');
       ScrollLock.unlock();
-      if (returnFocus !== false) hamburger.focus();
+      if (returnFocus !== false) focusNoScroll(hamburger);
     }
 
     hamburger.setAttribute('aria-expanded', 'false');
@@ -605,7 +628,7 @@
       if (!label.id) label.id = uid + '-label';
       btn.setAttribute('aria-labelledby', label.id + ' ' + btn.id);
       panel.setAttribute('aria-labelledby', label.id);
-      label.addEventListener('click', function (e) { e.preventDefault(); btn.focus(); api.open(); });
+      label.addEventListener('click', function (e) { e.preventDefault(); focusNoScroll(btn); api.open(); });
     } else if (select.getAttribute('aria-label')) {
       btn.setAttribute('aria-label', select.getAttribute('aria-label'));
     }
@@ -737,7 +760,11 @@
         }, 320);
       }
       if (openSelect === api) openSelect = null;
-      if (refocus !== false) btn.focus();
+      /* Only hand focus back for keyboard users. On touch this would leave
+         the trigger focused after the visitor scrolls away, so any later
+         focus change (Tab, or the browser re-asserting it) would drag the
+         page back down to this field. */
+      if (refocus !== false && keyboardMode) focusNoScroll(btn);
     }
 
     btn.addEventListener('click', function () { isOpen ? close() : open(); });
@@ -921,7 +948,7 @@
          requestAnimationFrame is not enough, as its callbacks run before
          style recalculation. */
       void modal.offsetHeight;
-      if (closeBtn) closeBtn.focus();
+      focusNoScroll(closeBtn);
     }
 
     function close() {
@@ -930,7 +957,7 @@
       modal.classList.remove('open');
       modal.setAttribute('aria-hidden', 'true');
       ScrollLock.unlock();
-      if (lastTrigger && document.contains(lastTrigger)) lastTrigger.focus();
+      if (lastTrigger && document.contains(lastTrigger)) focusNoScroll(lastTrigger);
       lastTrigger = null;
     }
 
@@ -1050,7 +1077,7 @@
       ScrollLock.lock();
       /* Same visibility:hidden caveat as the property modal. */
       void lightbox.offsetHeight;
-      if (closeBtn) closeBtn.focus();
+      focusNoScroll(closeBtn);
     }
 
     function close() {
@@ -1059,7 +1086,7 @@
       lightbox.classList.remove('open');
       lightbox.setAttribute('aria-hidden', 'true');
       ScrollLock.unlock();
-      if (lastTrigger && document.contains(lastTrigger)) lastTrigger.focus();
+      if (lastTrigger && document.contains(lastTrigger)) focusNoScroll(lastTrigger);
       lastTrigger = null;
     }
 
