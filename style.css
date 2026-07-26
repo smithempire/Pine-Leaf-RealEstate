@@ -426,6 +426,133 @@ body.is-locked{ position:fixed; width:100%; overflow:hidden; }
 .no-results{ text-align:center; padding:60px 20px; color: var(--text-soft); display:none; }
 .no-results.show{ display:block; }
 /* ============================================================
+   Custom select
+   Progressive enhancement over a real <select>, which stays in the
+   DOM as the value store so every existing filter/form read keeps
+   working. Native selects remain fully usable if JS never runs.
+   ============================================================ */
+.cselect{ position:relative; width:100%; }
+/* Native control is kept for value + form submission, taken out of the
+   tab order so there is only ever one focusable control per field. */
+.cselect > select{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
+.cselect-btn{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  width:100%; min-height:48px; padding:13px 14px;
+  border-radius: var(--r-sm); border:1.5px solid var(--line);
+  background: var(--grey-light); color: var(--text);
+  font-family:inherit; font-size:1rem; text-align:left;
+  transition: border-color .25s var(--ease), background .25s var(--ease), box-shadow .25s var(--ease);
+}
+.cselect-btn:hover{ border-color:#C4CFC7; }
+.cselect-btn .cselect-value{
+  flex:1 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+/* Muted until the visitor actually picks something */
+.cselect-btn[data-placeholder="true"] .cselect-value{ color: var(--text-soft); }
+.cselect-btn .cselect-caret{
+  flex:0 0 auto; font-size:.72rem; color: var(--text-soft);
+  transition: transform .28s var(--ease), color .25s var(--ease);
+}
+.cselect.is-open .cselect-btn{
+  border-color: var(--emerald); background: var(--white);
+  box-shadow: 0 0 0 3px rgba(28,122,78,.14);
+}
+.cselect.is-open .cselect-caret{ transform: rotate(180deg); color: var(--emerald); }
+.cselect-btn:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+
+.cselect-panel{
+  position:absolute; left:0; right:0; top:calc(100% + 6px); z-index:60;
+  background: var(--white); border:1.5px solid var(--line); border-radius: var(--r-sm);
+  box-shadow: var(--shadow-md); padding:6px;
+  max-height:264px; overflow-y:auto; overscroll-behavior:contain;
+  opacity:0; visibility:hidden; transform: translateY(-6px);
+  transition: opacity .2s var(--ease), transform .2s var(--ease), visibility 0s .2s;
+}
+/* State lives on the panel, not the wrapper, because in mobile sheet mode
+   the panel is portalled onto <body> and is no longer a descendant. */
+.cselect-panel.is-open{
+  opacity:1; visibility:visible; transform:none; transition: opacity .2s var(--ease), transform .2s var(--ease), visibility 0s 0s;
+}
+/* Flips above the field when there is not enough room below */
+.cselect-panel.drop-up{ top:auto; bottom:calc(100% + 6px); transform: translateY(6px); }
+.cselect-panel.drop-up.is-open{ transform:none; }
+
+.cselect-opt{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  min-height:44px; padding:10px 12px; border-radius:8px;
+  font-size:.94rem; color: var(--text); cursor:pointer;
+  transition: background .18s var(--ease), color .18s var(--ease);
+}
+.cselect-opt + .cselect-opt{ margin-top:2px; }
+.cselect-opt.is-active{ background: rgba(28,122,78,.09); color: var(--forest); }
+.cselect-opt[aria-selected="true"]{ color: var(--emerald); font-weight:600; }
+.cselect-opt[aria-selected="true"]::after{
+  content:"\f00c"; font-family:"Font Awesome 6 Free"; font-weight:900;
+  font-size:.72rem; color: var(--emerald); flex:0 0 auto;
+}
+.cselect-panel::-webkit-scrollbar{ width:8px; }
+.cselect-panel::-webkit-scrollbar-thumb{ background: var(--grey-mist); border-radius:999px; }
+
+/* Sheet header — only shown in mobile bottom-sheet mode */
+.cselect-head{ display:none; }
+.cselect-scrim{
+  position:fixed; inset:0; background: rgba(8,29,18,.5); z-index:1150;
+  opacity:0; visibility:hidden; transition: opacity .25s var(--ease), visibility 0s .25s;
+}
+.cselect-scrim.show{ opacity:1; visibility:visible; transition: opacity .25s var(--ease), visibility 0s 0s; }
+
+/* ---- Mobile: bottom sheet ----
+   Stacked fields mean an anchored panel lands squarely on top of the next
+   field's trigger, so a tap intended for that field selects an option
+   instead. A sheet is what the native control does on touch, and it
+   removes the mis-tap entirely. */
+@media (max-width: 639px){
+  .cselect-panel{
+    position:fixed; left:0; right:0; bottom:0; top:auto; z-index:1200;
+    max-height:min(62vh, 460px);
+    padding:0 10px calc(12px + var(--safe-b));
+    border:0; border-radius: var(--r-lg) var(--r-lg) 0 0;
+    box-shadow: 0 -18px 50px rgba(8,29,18,.28);
+    transform: translateY(100%);
+    transition: transform .3s var(--ease), visibility 0s .3s;
+    opacity:1;
+  }
+  .cselect-panel.drop-up{ top:auto; bottom:0; transform: translateY(100%); }
+  .cselect-panel.is-open,
+  .cselect-panel.drop-up.is-open{ transform: translateY(0); transition: transform .3s var(--ease), visibility 0s 0s; }
+
+  .cselect-head{
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    position:sticky; top:0; z-index:1; background: var(--white);
+    padding:14px 6px 10px; margin-bottom:2px; border-bottom:1px solid var(--line);
+  }
+  .cselect-head b{ font-family: var(--font-display); font-size:1rem; color: var(--forest); }
+  .cselect-head button{
+    width:36px; height:36px; border-radius:50%; background: var(--grey-light);
+    display:flex; align-items:center; justify-content:center; color: var(--text-soft); flex-shrink:0;
+  }
+  /* A grab handle above the header reads as a dismissible sheet */
+  .cselect-panel::before{
+    content:""; display:block; width:40px; height:4px; border-radius:999px;
+    background: var(--grey-mist); margin:10px auto 0;
+  }
+  .cselect-opt{ min-height:52px; font-size:1rem; padding:12px 14px; }
+}
+@media (prefers-reduced-motion: reduce){
+  .cselect-scrim{ transition:none; }
+}
+
+/* Dark surfaces (footer / dark sections) */
+.section-dark .cselect-btn, .site-footer .cselect-btn{
+  background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.2); color: var(--white);
+}
+@media (prefers-reduced-motion: reduce){
+  .cselect-panel, .cselect-caret{ transition:none; }
+}
+/* ============================================================
    Cards — properties
    ============================================================ */
 /* Single column by default; wider tracks are added from 640px up. */
@@ -795,12 +922,21 @@ body.is-locked{ position:fixed; width:100%; overflow:hidden; }
 @media (prefers-reduced-motion: reduce){
   .float-stack{ transition:none; }
 }
-.fab{ width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--white); font-size:1.15rem; box-shadow: var(--shadow-md); transition: transform .3s, opacity .3s, visibility .3s; }
+.fab{ width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--white); font-size:1.15rem; box-shadow: var(--shadow-md); transition: transform .3s; flex:0 0 auto; }
 .fab:hover{ transform: scale(1.08); }
-.fab.whatsapp{ background:#25D366; }
-.fab.email{ background: linear-gradient(135deg, var(--emerald-light), var(--emerald)); display:none; }
-.fab.top{ background: var(--forest); opacity:0; visibility:hidden; transform: translateY(10px); }
-.fab.top.show{ opacity:1; visibility:visible; transform: translateY(0); }
+/* WhatsApp is the primary action, so it is pinned to the corner and never
+   moves; the back-to-top button appears above it rather than below. */
+.fab.whatsapp{ background:#25D366; order:3; }
+.fab.email{ background: linear-gradient(135deg, var(--emerald-light), var(--emerald)); display:none; order:2; }
+/* display:none (not visibility:hidden) so the hidden button reserves no
+   space — otherwise the stack keeps a 48px hole and the WhatsApp icon
+   hovers well above the corner instead of sitting in it. */
+.fab.top{ background: var(--forest); display:none; order:1; }
+.fab.top.show{ display:flex; animation: fabPop .28s var(--ease) both; }
+@keyframes fabPop{ from{ opacity:0; transform: translateY(10px) scale(.85); } to{ opacity:1; transform:none; } }
+@media (prefers-reduced-motion: reduce){
+  .fab.top.show{ animation:none; }
+}
 /* Reserve room at the page floor so fixed FABs never permanently cover the
    last row of footer content (the newsletter Join button). */
 .site-footer{ padding-bottom: calc(72px + var(--safe-b)); }

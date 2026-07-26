@@ -521,6 +521,268 @@
   }
 
   /* ---------------------------------------------------------
+     Custom select
+     Enhances every native <select> with a styled listbox. The real
+     <select> stays in the DOM and remains the single source of truth,
+     so filters, form reads and form submission are unaffected — and
+     if this component throws, the native control is still there.
+  --------------------------------------------------------- */
+  var openSelect = null;   /* only one panel open at a time */
+  var selectScrim = null;
+  var sheetMQ = null;
+
+  function isSheetMode() { return !!(sheetMQ && sheetMQ.matches); }
+
+  function initCustomSelects() {
+    var selects = $$('select');
+    if (!selects.length) return;
+
+    sheetMQ = window.matchMedia('(max-width: 639px)');
+
+    selectScrim = document.createElement('div');
+    selectScrim.className = 'cselect-scrim';
+    document.body.appendChild(selectScrim);
+    selectScrim.addEventListener('click', function () {
+      if (openSelect) openSelect.close();
+    });
+
+    selects.forEach(buildCustomSelect);
+
+    /* One document-level listener for all instances. The panel is checked
+       separately because in sheet mode it is portalled onto <body> and is
+       therefore no longer a descendant of its own root. */
+    document.addEventListener('click', function (e) {
+      if (!openSelect) return;
+      if (openSelect.root.contains(e.target)) return;
+      if (openSelect.panel && openSelect.panel.contains(e.target)) return;
+      openSelect.close();
+    });
+    window.addEventListener('resize', function () {
+      if (openSelect) openSelect.close(false);
+    });
+  }
+
+  function buildCustomSelect(select) {
+    if (select.dataset.enhanced === 'true') return;
+    if (select.multiple || select.size > 1) return;
+    select.dataset.enhanced = 'true';
+
+    var options = $$('option', select);
+    if (!options.length) return;
+
+    var root = document.createElement('div');
+    root.className = 'cselect';
+    select.parentNode.insertBefore(root, select);
+    root.appendChild(select);
+
+    var uid = select.id || ('sel-' + Math.abs(hashString(select.name || options[0].textContent)));
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'cselect-btn';
+    btn.id = uid + '-btn';
+    btn.setAttribute('role', 'combobox');
+    btn.setAttribute('aria-haspopup', 'listbox');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-controls', uid + '-panel');
+
+    var valueEl = document.createElement('span');
+    valueEl.className = 'cselect-value';
+    var caret = document.createElement('i');
+    caret.className = 'fa-solid fa-chevron-down cselect-caret';
+    caret.setAttribute('aria-hidden', 'true');
+    btn.appendChild(valueEl);
+    btn.appendChild(caret);
+
+    var panel = document.createElement('div');
+    panel.className = 'cselect-panel';
+    panel.id = uid + '-panel';
+    panel.setAttribute('role', 'listbox');
+    panel.tabIndex = -1;
+
+    /* Reuse the existing <label for="..."> so the control keeps its name. */
+    var label = select.id ? document.querySelector('label[for="' + CSS.escape(select.id) + '"]') : null;
+    if (label) {
+      if (!label.id) label.id = uid + '-label';
+      btn.setAttribute('aria-labelledby', label.id + ' ' + btn.id);
+      panel.setAttribute('aria-labelledby', label.id);
+      label.addEventListener('click', function (e) { e.preventDefault(); btn.focus(); api.open(); });
+    } else if (select.getAttribute('aria-label')) {
+      btn.setAttribute('aria-label', select.getAttribute('aria-label'));
+    }
+
+    /* Sheet header (mobile only — CSS keeps it hidden on larger screens). */
+    var head = document.createElement('div');
+    head.className = 'cselect-head';
+    var headTitle = document.createElement('b');
+    headTitle.textContent = (label ? label.textContent : select.getAttribute('aria-label') || 'Select').trim();
+    var headClose = document.createElement('button');
+    headClose.type = 'button';
+    headClose.setAttribute('aria-label', 'Close ' + headTitle.textContent + ' options');
+    headClose.innerHTML = '<i class="fa-solid fa-xmark" aria-hidden="true"></i>';
+    headClose.addEventListener('click', function () { close(); });
+    head.appendChild(headTitle);
+    head.appendChild(headClose);
+    panel.appendChild(head);
+
+    var optEls = options.map(function (opt, i) {
+      var li = document.createElement('div');
+      li.className = 'cselect-opt';
+      li.id = uid + '-opt-' + i;
+      li.setAttribute('role', 'option');
+      li.setAttribute('aria-selected', 'false');
+      li.dataset.value = opt.value;
+      li.textContent = opt.textContent;
+      li.addEventListener('click', function () { choose(i, true); });
+      li.addEventListener('mousemove', function () { setActive(i); });
+      panel.appendChild(li);
+      return li;
+    });
+
+    root.appendChild(btn);
+    root.appendChild(panel);
+    select.setAttribute('tabindex', '-1');
+    select.setAttribute('aria-hidden', 'true');
+
+    var activeIndex = Math.max(0, select.selectedIndex);
+    var isOpen = false;
+    var typeBuffer = '';
+    var typeTimer = null;
+
+    function syncFromNative() {
+      var i = Math.max(0, select.selectedIndex);
+      activeIndex = i;
+      var opt = options[i];
+      valueEl.textContent = opt ? opt.textContent : '';
+      /* Treat an empty value ("All Locations", "Any Budget") as placeholder. */
+      btn.setAttribute('data-placeholder', opt && opt.value === '' ? 'true' : 'false');
+      optEls.forEach(function (el, idx) {
+        el.setAttribute('aria-selected', idx === i ? 'true' : 'false');
+      });
+    }
+
+    function setActive(i) {
+      activeIndex = (i + optEls.length) % optEls.length;
+      optEls.forEach(function (el, idx) { el.classList.toggle('is-active', idx === activeIndex); });
+      btn.setAttribute('aria-activedescendant', optEls[activeIndex].id);
+      var el = optEls[activeIndex];
+      var pt = panel.scrollTop, pb = pt + panel.clientHeight;
+      if (el.offsetTop < pt) panel.scrollTop = el.offsetTop;
+      else if (el.offsetTop + el.offsetHeight > pb) panel.scrollTop = el.offsetTop + el.offsetHeight - panel.clientHeight;
+    }
+
+    function choose(i, closeAfter) {
+      if (select.selectedIndex !== i) {
+        select.selectedIndex = i;
+        /* Notify every existing listener exactly as a native pick would. */
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      syncFromNative();
+      if (closeAfter) { close(); }
+    }
+
+    var lockedForSheet = false;
+    var portalled = false;
+
+    function open() {
+      if (isOpen) return;
+      if (openSelect && openSelect !== api) openSelect.close(false);
+      isOpen = true;
+
+      if (isSheetMode()) {
+        /* Bottom sheet: anchoring is irrelevant, but the page behind it
+           must not scroll and the scrim must catch outside taps.
+           The panel is moved onto <body> because ancestors such as
+           .search-panel establish a low stacking context that would
+           otherwise pin the sheet underneath the full-screen scrim. */
+        root.classList.remove('drop-up');
+        panel.classList.remove('drop-up');
+        document.body.appendChild(panel);
+        portalled = true;
+        if (selectScrim) selectScrim.classList.add('show');
+        ScrollLock.lock();
+        lockedForSheet = true;
+      } else {
+        /* Flip upward when the panel would run past the viewport bottom. */
+        var rect = btn.getBoundingClientRect();
+        var space = window.innerHeight - rect.bottom;
+        var up = space < 240 && rect.top > space;
+        root.classList.toggle('drop-up', up);
+        panel.classList.toggle('drop-up', up);
+      }
+
+      root.classList.add('is-open');
+      panel.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+      setActive(Math.max(0, select.selectedIndex));
+      openSelect = api;
+    }
+
+    function close(refocus) {
+      if (!isOpen) return;
+      isOpen = false;
+      root.classList.remove('is-open');
+      panel.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.removeAttribute('aria-activedescendant');
+      optEls.forEach(function (el) { el.classList.remove('is-active'); });
+      if (lockedForSheet) {
+        if (selectScrim) selectScrim.classList.remove('show');
+        ScrollLock.unlock();
+        lockedForSheet = false;
+      }
+      if (portalled) {
+        /* Return the panel to its own root once the sheet has slid away. */
+        window.setTimeout(function () {
+          if (!isOpen && portalled) { root.appendChild(panel); portalled = false; }
+        }, 320);
+      }
+      if (openSelect === api) openSelect = null;
+      if (refocus !== false) btn.focus();
+    }
+
+    btn.addEventListener('click', function () { isOpen ? close() : open(); });
+
+    btn.addEventListener('keydown', function (e) {
+      var k = e.key;
+      if (k === 'Escape') { if (isOpen) { e.preventDefault(); close(); } return; }
+      if (k === 'Tab') { if (isOpen) close(false); return; }
+
+      if (!isOpen) {
+        if (k === 'ArrowDown' || k === 'ArrowUp' || k === 'Enter' || k === ' ') { e.preventDefault(); open(); return; }
+      } else {
+        if (k === 'ArrowDown') { e.preventDefault(); setActive(activeIndex + 1); return; }
+        if (k === 'ArrowUp') { e.preventDefault(); setActive(activeIndex - 1); return; }
+        if (k === 'Home') { e.preventDefault(); setActive(0); return; }
+        if (k === 'End') { e.preventDefault(); setActive(optEls.length - 1); return; }
+        if (k === 'Enter' || k === ' ') { e.preventDefault(); choose(activeIndex, true); return; }
+      }
+
+      /* Type-ahead, matching native select behaviour. */
+      if (k.length === 1 && /\S/.test(k)) {
+        typeBuffer += k.toLowerCase();
+        if (typeTimer) window.clearTimeout(typeTimer);
+        typeTimer = window.setTimeout(function () { typeBuffer = ''; }, 600);
+        var hit = options.findIndex(function (o) {
+          return o.textContent.trim().toLowerCase().indexOf(typeBuffer) === 0;
+        });
+        if (hit !== -1) { isOpen ? setActive(hit) : choose(hit, false); }
+      }
+    });
+
+    /* Reflect programmatic changes (URL seeding, form reset). */
+    select.addEventListener('change', syncFromNative);
+
+    var api = { root: root, panel: panel, close: close, open: open };
+    syncFromNative();
+  }
+
+  function hashString(s) {
+    var h = 0;
+    for (var i = 0; i < s.length; i++) { h = ((h << 5) - h) + s.charCodeAt(i); h |= 0; }
+    return h;
+  }
+
+  /* ---------------------------------------------------------
      Property card actions — favourite / share
   --------------------------------------------------------- */
   function initPropertyCards() {
@@ -1235,6 +1497,8 @@
     runComponent('counters', initCounters);
     runComponent('reveals', initReveals);
     runComponent('property filters', initPropertyFilters);
+    /* After the filters so any values seeded from the URL are picked up. */
+    runComponent('custom selects', initCustomSelects);
     runComponent('property cards', initPropertyCards);
     runComponent('property modal', initPropertyModal);
     runComponent('gallery', initGallery);
