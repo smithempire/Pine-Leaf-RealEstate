@@ -1432,7 +1432,7 @@
   --------------------------------------------------------- */
   function initFloatingActions() {
     var stack = $('.float-stack');
-    var topBtn = $('.fab.top');
+    var topBtn = $('.float-btn.top');
     if (!stack && !topBtn) return;
 
     var ticking = false;

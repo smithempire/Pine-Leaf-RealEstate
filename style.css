@@ -248,8 +248,10 @@ body.is-locked{ position:fixed; width:100%; overflow:hidden; }
 .site-header.scrolled .brand-name{ color: var(--forest); }
 .site-header.scrolled .brand-name span{ color: var(--emerald); }
 
-/* Desktop navigation is opt-in from 992px up (see responsive.css). */
-.main-nav{ display:none; align-items:center; gap:clamp(18px, 2.2vw, 36px); }
+/* Desktop navigation is opt-in from 1080px up (see responsive.css).
+   overflow:hidden is a last-resort guard: if the seven links ever exceed
+   their track, they clip rather than paint over the action icons. */
+.main-nav{ display:none; align-items:center; gap:clamp(16px, 1.9vw, 25px); overflow:hidden; }
 .main-nav a{
   font-size:.92rem; font-weight:600; color: rgba(255,255,255,.88);
   position:relative; padding:6px 0; transition: color .3s; white-space:nowrap;
@@ -922,20 +924,20 @@ body.is-locked{ position:fixed; width:100%; overflow:hidden; }
 @media (prefers-reduced-motion: reduce){
   .float-stack{ transition:none; }
 }
-.fab{ width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--white); font-size:1.15rem; box-shadow: var(--shadow-md); transition: transform .3s; flex:0 0 auto; }
-.fab:hover{ transform: scale(1.08); }
+.float-btn{ width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--white); font-size:1.15rem; box-shadow: var(--shadow-md); transition: transform .3s; flex:0 0 auto; }
+.float-btn:hover{ transform: scale(1.08); }
 /* WhatsApp is the primary action, so it is pinned to the corner and never
    moves; the back-to-top button appears above it rather than below. */
-.fab.whatsapp{ background:#25D366; order:3; }
-.fab.email{ background: linear-gradient(135deg, var(--emerald-light), var(--emerald)); display:none; order:2; }
+.float-btn.whatsapp{ background:#25D366; order:3; }
+.float-btn.email{ background: linear-gradient(135deg, var(--emerald-light), var(--emerald)); display:none; order:2; }
 /* display:none (not visibility:hidden) so the hidden button reserves no
    space — otherwise the stack keeps a 48px hole and the WhatsApp icon
    hovers well above the corner instead of sitting in it. */
-.fab.top{ background: var(--forest); display:none; order:1; }
-.fab.top.show{ display:flex; animation: fabPop .28s var(--ease) both; }
+.float-btn.top{ background: var(--forest); display:none; order:1; }
+.float-btn.top.show{ display:flex; animation: fabPop .28s var(--ease) both; }
 @keyframes fabPop{ from{ opacity:0; transform: translateY(10px) scale(.85); } to{ opacity:1; transform:none; } }
 @media (prefers-reduced-motion: reduce){
-  .fab.top.show{ animation:none; }
+  .float-btn.top.show{ animation:none; }
 }
 /* Reserve room at the page floor so fixed FABs never permanently cover the
    last row of footer content (the newsletter Join button). */
